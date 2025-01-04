@@ -5,8 +5,8 @@ import pandas as pd
 
 inputName = input('Enter the name of the input image(please include the file extension)>> ')
 targetName = input('Enter the name of the target image(please include the file extension)>> ')
-input = imread(f"data/input/{inputName}")
-target = imread(f"data/target/{targetName}")
+input = imread(f"data/images/input/{inputName}")
+target = imread(f"data/images/target/{targetName}")
 
 tempList = []
 tempList2 = []
@@ -22,8 +22,8 @@ for r in range(target.shape[0]):
 inputDataframe = pd.DataFrame(tempList)
 targetDataframe = pd.DataFrame(tempList2)
 
+
 outputDataframe = pd.concat([inputDataframe,targetDataframe], axis=1)
 outputDataframe.columns = ['rI','gI','bI','rT','gT','bT']
-outputDataframe.drop_duplicates()
-outputDataframe.to_csv('input2.csv', sep=',', index=False)
+outputDataframe.to_csv('data/scrapeFromHere/pixelValues.csv', sep=',', index=False)
 
