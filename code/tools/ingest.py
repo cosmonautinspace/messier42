@@ -1,6 +1,5 @@
 import numpy as np 
 from matplotlib.image import imread
-from PIL import Image
 import pandas as pd 
 
 inputName = input('Enter the name of the input image(please include the file extension)>> ')
@@ -24,6 +23,10 @@ targetDataframe = pd.DataFrame(tempList2)
 
 
 outputDataframe = pd.concat([inputDataframe,targetDataframe], axis=1)
+
+
+# "I" columns are the input variables for RGB values, respectively, taken from the unstretched image
+# "T" columns are the target variables for RGB values, respectively, taken from the stretched image
 outputDataframe.columns = ['rI','gI','bI','rT','gT','bT']
 outputDataframe.to_csv('data/scrapeFromHere/pixelValues.csv', sep=',', index=False)
 
