@@ -11,5 +11,5 @@ test*
 # ignore ALL files in ANY directory named temp
 temp/ 
 code/logs
-code/experiments/logs
+code/experiments/logs 
 code/messageClient/logs
