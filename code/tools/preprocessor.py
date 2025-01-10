@@ -27,7 +27,7 @@ data.insert(loc=0, column='gM', value=gMfactor)
 
 #The raw target pixel values are dropped as they are not needed once the multiplication factor has been calculated
 data = data.drop(columns=['rT','gT','bT'])q
-data = data.drop_duplicates()
+data = data.drop_duplicates(keep='first')
 
 data.reset_index(drop=True, inplace=True)
 
