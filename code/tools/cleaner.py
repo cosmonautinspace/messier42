@@ -75,4 +75,4 @@ train, test = train_test_split(data, test_size=0.2, train_size=0.8)
 
 train.to_csv('data/cleanedData/trainData.csv', index=False)
 test.to_csv('data/cleanedData/testData.csv', index=False)
-
+data.to_csv('data/extras/cleanedDataWhole.csv')
