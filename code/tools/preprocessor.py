@@ -28,26 +28,8 @@ data.insert(loc=0, column='gM', value=gMfactor)
 #The raw target pixel values are dropped as they are not needed once the multiplication factor has been calculated
 data = data.drop(columns=['rT','gT','bT'])q
 data = data.drop_duplicates()
-'''
-#normalization
-#The maximum possible theoretical multiplaction factor for a pixel is 255 (when value is amplified from 1 to 255)
-#Also the maximum possible value for a pixel is 255, so both the raw pixel values and the MFactor as divided by 255 for normalization
-'''
 
-'''
-for i in range(data['gM'].size):
-    data['gM'].iloc[[i]] /= 255
-    data['rbM'].iloc[[i]] /= 255
-    data['gI'].iloc[[i]] /= 255
-    data['rI'].iloc[[i]] /= 255
-    data['bI'].iloc[[i]] /= 255
-'''
 data.reset_index(drop=True, inplace=True)
-
-###############Outlier removal###############
-#quartile filter
-
-#zscore filter
 
 print(data)
 
