@@ -6,8 +6,9 @@ import matplotlib.pyplot as plt
 
 df = pd.read_csv('data/extras/cleanedDataWhole.csv')
 
-plt.scatter(df['gM'], df['gI'], c='green')
+#plt.scatter(df['gM'], df['gI'], c='green')
 plt.scatter(df['rbM'], df['rI'], c='red')
-plt.scatter(df['rbM'], df['bI'], c='blue')
+#plt.scatter(df['rbM'], df['bI'], c='blue')
+
 
 plt.show()
