@@ -6,7 +6,7 @@ image = Image.open('data/images/input/inputCropped.TIFF')
 
 
 #just for testing purposes. real value will be calculated using the ann model
-factor=25
+factor=30
 for r in range(image.height):
     for c in range(image.width):
         pixelValue = image.getpixel((c,r))
