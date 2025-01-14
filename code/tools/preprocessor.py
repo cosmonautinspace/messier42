@@ -26,11 +26,11 @@ data.insert(loc=0, column='rbM', value=rbMfactor)
 data.insert(loc=0, column='gM', value=gMfactor)
 
 #The raw target pixel values are dropped as they are not needed once the multiplication factor has been calculated
-data = data.drop(columns=['rT','gT','bT'])q
+data = data.drop(columns=['rT','gT','bT'])
 data = data.drop_duplicates(keep='first')
 
 data.reset_index(drop=True, inplace=True)
 
 print(data)
 
-data.to_csv('test.csv', sep=',', index=False)
+data.to_csv('data/scrapeFromHere/Preprocessed.csv', sep=',', index=False)

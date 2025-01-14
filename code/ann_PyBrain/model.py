@@ -7,7 +7,6 @@ from pybrain.structure.modules import SoftmaxLayer, LinearLayer, SigmoidLayer, T
 #from pybrain.utilities import percentError
 from pybrain.structure import FullConnection
 from pybrain.tools.customxml.networkwriter import NetworkWriter
-from pybrain.tools.customxml.networkreader import NetworkReader
 import random
 import matplotlib.pyplot as plt
 import numpy as np
@@ -104,8 +103,8 @@ trainer = BackpropTrainer(annG, dataset=trainG, verbose=True, learningrate=0.000
 for i in range(rounds):
     trainer.trainEpochs(1)
 
-NetworkWriter.writeToFile(annRB, "modelRedBlue.xml")
-NetworkWriter.writeToFile(annG, "modelGreen.xml")
+NetworkWriter.writeToFile(annRB, "code/ann_PyBrain/modelRedBlue.xml")
+NetworkWriter.writeToFile(annG, "code/ann_PyBrain/modelGreen.xml")
 
 print(testRB)
 print(annRB.activateOnDataset(testRB))

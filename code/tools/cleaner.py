@@ -3,7 +3,7 @@ from scipy.stats import zscore
 from sklearn.model_selection import train_test_split
 import statsmodels.api as sm 
 
-data = pd.read_csv('data/scrapedData/placeholderData.csv')
+data = pd.read_csv('data/scrapedData/Preprocessed.csv')
 
 # Basic Data cleaning
 data["gM"] = pd.to_numeric(data["gM"],errors="coerce")
@@ -75,4 +75,4 @@ train, test = train_test_split(data, test_size=0.2, train_size=0.8)
 
 train.to_csv('data/cleanedData/trainData.csv', index=False)
 test.to_csv('data/cleanedData/testData.csv', index=False)
-data.to_csv('data/extras/cleanedDataWhole.csv')
+data.to_csv('data/extras/cleanedDataWhole.csv', index=False)
