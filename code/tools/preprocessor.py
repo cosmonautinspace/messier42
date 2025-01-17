@@ -34,3 +34,4 @@ data.reset_index(drop=True, inplace=True)
 print(data)
 
 data.to_csv('data/scrapeFromHere/16bitvalues.csv', sep=',', index=False)
+

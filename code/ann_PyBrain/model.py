@@ -18,8 +18,9 @@ import statsmodels.api as sm
 RGB subpixel values as input variables (3)
 RedBlueMultiplicationFactor and GreenMultiplicationFactor as the target variables (2)'''
 
-data = pd.read_csv('data/extras/cleanedDataWhole.csv')
+data = pd.read_csv('data/extras/first_16bitvalues_cleanedDataWhole.csv')
 
+print('data read')
 alldataG = SupervisedDataSet(inp=1,target=1)
 alldataRB = SupervisedDataSet(inp=2,target=1)
 for i in range(data['rI'].size):
@@ -27,18 +28,18 @@ for i in range(data['rI'].size):
 
 for i in range(data['rI'].size):
     alldataRB.addSample(inp=[data.rI[i],data.bI[i]], target=[data.rbM[i]])
+print('data prepped')
 
+testG, trainG = alldataG.splitWithProportion(0.2)
 
-testG, trainG = alldataG.splitWithProportion(0.20)
-
-testRB, trainRB = alldataRB.splitWithProportion(0.20)
-
+testRB, trainRB = alldataRB.splitWithProportion(0.2)
+print('data split')
 
 '''Model configuration can be found below, need to optimize before final submission of the project....Just placeholder values for now, for testing 
 purposes'''
 
 hiddenLayers = 100
-rounds = 5
+rounds = 1
 
 '''
 ann = FeedForwardNetwork()
@@ -57,7 +58,7 @@ ann.addConnection(hiddenToOut)
 ann.sortModules()
 '''
 
-annRB = ()
+annRB = FeedForwardNetwork()
 
 inLayer = LinearLayer(2)
 hiddenLayer = TanhLayer(hiddenLayers)
@@ -86,7 +87,7 @@ hiddenToOut = FullConnection(hiddenLayer,outLayer)
 annG.addConnection(inToHidden)
 annG.addConnection(hiddenToOut)
 annG.sortModules()
-
+print('model built')
 
 '''Training'''
 '''
@@ -103,8 +104,8 @@ trainer = BackpropTrainer(annG, dataset=trainG, verbose=True, learningrate=0.000
 for i in range(rounds):
     trainer.trainEpochs(1)
 
-NetworkWriter.writeToFile(annRB, "code/ann_PyBrain/modelRedBlue.xml")
-NetworkWriter.writeToFile(annG, "code/ann_PyBrain/modelGreen.xml")
+NetworkWriter.writeToFile(annRB, "code/ann_PyBrain/modelRedBlue16bit.xml")
+NetworkWriter.writeToFile(annG, "code/ann_PyBrain/modelGreen16bit.xml")
 
 print(testRB)
 print(annRB.activateOnDataset(testRB))

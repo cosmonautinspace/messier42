@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 '''Some test visualisations nothing important as of yet'''
 
-df = pd.read_csv('data/extras/cleanedDataWhole.csv')
+df = pd.read_csv('data/scrapeFromHere/first_16bitvalues.csv')
 
 #plt.scatter(df['gM'], df['gI'], c='green')
 plt.scatter(df['rbM'], df['rI'], c='red')
