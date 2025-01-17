@@ -1,7 +1,7 @@
 import pandas as pd 
 from pybrain.tools.shortcuts import buildNetwork
 from pybrain.datasets import SupervisedDataSet
-from pybrain.structure import FeedForwardNetwork
+from pybrain.structure import FeedForwardNetwork 
 from pybrain.supervised import BackpropTrainer
 from pybrain.structure.modules import SoftmaxLayer, LinearLayer, SigmoidLayer, TanhLayer, ReluLayer
 #from pybrain.utilities import percentError
@@ -57,7 +57,7 @@ ann.addConnection(hiddenToOut)
 ann.sortModules()
 '''
 
-annRB = FeedForwardNetwork()
+annRB = ()
 
 inLayer = LinearLayer(2)
 hiddenLayer = TanhLayer(hiddenLayers)

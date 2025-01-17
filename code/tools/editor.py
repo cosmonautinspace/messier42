@@ -4,7 +4,9 @@ import math
 
 '''This script is for the final adjustment of pixel values of a given unstrectched image'''
 
-image = Image.open('data/images/input/inputCropped.tif')
+inputImage=input("Enter the name of the input image(placed in the input folder)")
+
+image = Image.open(f'data/images/input/{inputImage}')
 annRB = NetworkReader.readFrom("code/ann_PyBrain/modelRedBlue.xml")
 annG = NetworkReader.readFrom("code/ann_PyBrain/modelGreen.xml")
 
@@ -17,4 +19,4 @@ for r in range(image.height):
         rG= annG.activate([pixelValue[1]])
         image.putpixel((c,r),(pixelValue[0]*math.ceil(rbM),pixelValue[1]*math.ceil(rG),pixelValue[2]*math.ceil(rbM)))
 
-image.save('data/images/output/test2.png')
+image.save(f'data/images/output/{inputImage}')

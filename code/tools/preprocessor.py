@@ -1,6 +1,6 @@
 import pandas as pd 
 
-data = pd.read_csv('data/scrapeFromHere/pixelValues.csv')
+data = pd.read_csv('data/scrapeFromHere/16bitvalues.csv')
 
 
 
@@ -33,4 +33,4 @@ data.reset_index(drop=True, inplace=True)
 
 print(data)
 
-data.to_csv('data/scrapeFromHere/Preprocessed.csv', sep=',', index=False)
+data.to_csv('data/scrapeFromHere/16bitvalues.csv', sep=',', index=False)
