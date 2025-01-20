@@ -1,6 +1,6 @@
 import pandas as pd 
-
-data = pd.read_csv('data/scrapeFromHere/16bitvalues.csv')
+fileName = input("Enter the name of the file to preprocess >> ")
+data = pd.read_csv(f'data/scrapeFromHere/{fileName}.csv')
 
 
 
@@ -33,5 +33,5 @@ data.reset_index(drop=True, inplace=True)
 
 print(data)
 
-data.to_csv('data/scrapeFromHere/16bitvalues.csv', sep=',', index=False)
+data.to_csv(f'data/scrapeFromHere/{fileName}_preproc.csv', sep=',', index=False)
 

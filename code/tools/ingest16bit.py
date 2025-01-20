@@ -32,4 +32,4 @@ outputDataframe = pd.concat([inputDataframe,targetDataframe], axis=1)
 # "I" columns are the input variables for RGB values, respectively, taken from the unstretched image
 # "T" columns are the target variables for RGB values, respectively, taken from the stretched image
 outputDataframe.columns = ['rI','gI','bI','rT','gT','bT']
-outputDataframe.to_csv('data/scrapeFromHere/16bitvalues.csv', sep=',', index=False)
+outputDataframe.to_csv(f'data/scrapeFromHere/{inputName}_16bitvalues.csv', sep=',', index=False)

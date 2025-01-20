@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 import statsmodels.api as sm 
 
 fileName = input("Enter the name of the file to clean >> ")
-data = pd.read_csv(f'data/scrapedData/{fileName}')
+data = pd.read_csv(f'data/scrapedData/{fileName}.csv')
 
 # Basic Data cleaning
 data["gM"] = pd.to_numeric(data["gM"],errors="coerce")
@@ -72,6 +72,7 @@ data.reset_index(drop=True, inplace=True)
 Add normalization code later if the chosen model benefits from it.
 '''
 
+print(data)
 train, test = train_test_split(data, test_size=0.2, train_size=0.8)
 
 train.to_csv(f'data/cleanedData/{fileName}_trainData.csv', index=False)
