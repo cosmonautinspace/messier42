@@ -3,7 +3,7 @@ import requests
 
 SourceURL = "https://raw.githubusercontent.com/cosmonautinspace/ANN-Autostretcher-AIBAS-Project/main/data/scrapeFromHere/forScraping.csv"
 
-Output = "../../data/scrapedData/scrapedData.csv"
+Output = "data/scrapedData/scrapedData.csv"
 
 def scrape_and_save_csv():
     try:

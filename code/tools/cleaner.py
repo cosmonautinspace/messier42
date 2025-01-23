@@ -112,12 +112,10 @@ for i in range(0,zscorerbM.size):
 data.drop(to_drop,inplace=True)
 data.reset_index(drop=True, inplace=True)
 
-print()
 
 '''Normalizing Multiplication factor values'''
+'''Multiplication factors are normalized when the data is loaded so that the normalization factor is stored in memory'''
 
-
-print(data)
 train, test = train_test_split(data, test_size=0.2, train_size=0.8)
 
 train.to_csv(f'data/cleanedData/{fileName}_trainData.csv', index=False)
