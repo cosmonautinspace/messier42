@@ -2,8 +2,6 @@ import pandas as pd
 fileName = input("Enter the name of the file to preprocess >> ")
 data = pd.read_csv(f'data/scrapeFromHere/{fileName}.csv')
 
-
-
 #Since CMOS sensors employ the Bayer pattern, which has a 1:2:1 ratio of RGB subpixels, 
 #multiplication factor for Green needs to be calculated seperately.
 #Also, this theoretically helps with green noise removal.
@@ -34,4 +32,3 @@ data.reset_index(drop=True, inplace=True)
 print(data)
 
 data.to_csv(f'data/scrapeFromHere/{fileName}_preproc.csv', sep=',', index=False)
-
