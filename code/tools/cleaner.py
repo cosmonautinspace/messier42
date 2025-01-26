@@ -114,8 +114,19 @@ data.reset_index(drop=True, inplace=True)
 
 
 '''Normalizing Multiplication factor values'''
-'''Multiplication factors are normalized when the data is loaded so that the normalization factor is stored in memory'''
+'''Multiplication factors are normalized when the data is loaded so that the normalization factor is stored in memory
+the code for this can be found below but is comented out'''
 
+'''
+gMMax = data["gM"].max()
+rbMMax = data["rbM"].max()
+for i in range(data["gM"].size):
+    data["gM"].iloc[[i]] /= gMMax
+
+for i in range(data["rbM"].size):
+    data["rbM"].iloc[[i]] /= rbMMax
+'''
+    
 train, test = train_test_split(data, test_size=0.2, train_size=0.8)
 
 train.to_csv(f'data/cleanedData/{fileName}_trainData.csv', index=False)
