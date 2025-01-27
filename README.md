@@ -3,7 +3,7 @@ Stretching is an important part of processing RAW images, especially in the fiel
 
 The main idea behind the project is that the AI model could learn the stretching patterns of an astrophotographer and mimic their photo editing style, given an input map .csv file (generated from a collection of images by said photographer) 
 
-The project involves scraping data from the internet, which in this case is done by scraping a .csv file uploaded to this current repository under the `data/scrapeFromHere` folder. Then, the data is cleaned and an OLS and ANN model are trained and tested using an 80:20 train:test split. Lastly, two docker images, one for the training and one for applying the solution to a given set of data points are created and docker compose files are used to orchestrate the training, testing and application of the ANN solution. 
+The project involves scraping data from the internet, which in this case is done by scraping a .csv file uploaded to this repository under the `data/scrapeFromHere` folder. Then, the data is cleaned and an OLS and ANN model are trained and tested using an 80:20 train:test split. Lastly, two docker images, one for the training and one for applying the solution to a given set of data points are created and docker compose files are used to orchestrate the training, testing and application of the ANN solution. 
 
 ## Ownership
 This project is released under the AGPL 3.0 license and was built as a part of the course 'M. Grum: Advanced AI-based Application systems' (University of Potsdam) by Haani Ansari and Dipta Roy Karmakar.
