@@ -2,6 +2,7 @@ import pandas as pd
 from scipy.stats import zscore
 from sklearn.model_selection import train_test_split
 import statsmodels.api as sm 
+import random
 
 fileName = input("Enter the name of the file to clean >> ")
 data = pd.read_csv(f'data/scrapedData/{fileName}.csv')
@@ -17,10 +18,10 @@ for i in range(data["rI"].size):
     data['gT'].iloc[[i]] /= 255
     data['bT'].iloc[[i]] /= 255
 
-'''Calculating Multiplication factor'''
-#Since CMOS sensors employ the Bayer pattern, which has a 1:2:1 ratio of RGB subpixels, 
-#multiplication factor for Green needs to be calculated seperately.
-#Also, this theoretically helps with green noise removal.
+'''Calculating Multiplication factor
+Since CMOS sensors employ the Bayer pattern, which has a 1:2:1 ratio of RGB subpixels, 
+multiplication factor for Green needs to be calculated seperately.
+Also, this theoretically helps with green noise removal. ''' 
 
 #red and blue subpixel multiplication factor
 rbMfactor = []
@@ -129,6 +130,9 @@ for i in range(data["rbM"].size):
     
 train, test = train_test_split(data, test_size=0.2, train_size=0.8)
 
-train.to_csv(f'data/cleanedData/{fileName}_trainData.csv', index=False)
-test.to_csv(f'data/cleanedData/{fileName}_testData.csv', index=False)
-data.to_csv(f'data/extras/{fileName}_cleanedDataWhole.csv', index=False)
+activationData = data.iloc[[f'{random.randint(0,10)}']] 
+
+train.to_csv(f'data/cleanedData/train_data.csv', index=False)
+test.to_csv(f'data/cleanedData/test_data.csv', index=False)
+data.to_csv(f'data/extras/joint_datacollection.csv', index=False)
+activationData.to_csv(f'data/cleanedData/activation_data.csv', index=False)

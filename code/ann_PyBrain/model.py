@@ -18,17 +18,14 @@ import statsmodels.api as sm
 RGB subpixel values as input variables (3)
 RedBlueMultiplicationFactor and GreenMultiplicationFactor as the target variables (2)'''
 
-data = pd.read_csv('data/extras/first_16bitvalues_cleanedDataWhole.csv')
+data = pd.read_csv('data/cleanedData/train_data.csv')
 
 
 '''Normalization of multiplication factors'''
 gMMax = data["gM"].max()
 rbMMax = data["rbM"].max()
-for i in range(data["gM"].size):
-    data["gM"].iloc[[i]] /= gMMax
-
-for i in range(data["rbM"].size):
-    data["rbM"].iloc[[i]] /= rbMMax
+data["gM"] = data["gM"] / gMMax
+data["rbM"] = data["rbM"] / rbMMax
 
 print('data read')
 alldataG = SupervisedDataSet(inp=1,target=1)
@@ -114,8 +111,8 @@ trainer = BackpropTrainer(annG, dataset=trainG, verbose=True, learningrate=0.000
 for i in range(rounds):
     trainer.trainEpochs(1)
 
-NetworkWriter.writeToFile(annRB, "code/ann_PyBrain/modelRedBlue16bit.xml")
-NetworkWriter.writeToFile(annG, "code/ann_PyBrain/modelGreen16bit.xml")
+NetworkWriter.writeToFile(annRB, f"code/ann_PyBrain/{rbMMax}_RB.xml")
+NetworkWriter.writeToFile(annG, f"code/ann_PyBrain/{gMMax}_G.xml")
 
 print(testRB)
 print(annRB.activateOnDataset(testRB))
