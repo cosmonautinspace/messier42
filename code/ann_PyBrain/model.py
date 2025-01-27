@@ -20,6 +20,16 @@ RedBlueMultiplicationFactor and GreenMultiplicationFactor as the target variable
 
 data = pd.read_csv('data/extras/first_16bitvalues_cleanedDataWhole.csv')
 
+
+'''Normalization of multiplication factors'''
+gMMax = data["gM"].max()
+rbMMax = data["rbM"].max()
+for i in range(data["gM"].size):
+    data["gM"].iloc[[i]] /= gMMax
+
+for i in range(data["rbM"].size):
+    data["rbM"].iloc[[i]] /= rbMMax
+
 print('data read')
 alldataG = SupervisedDataSet(inp=1,target=1)
 alldataRB = SupervisedDataSet(inp=2,target=1)
