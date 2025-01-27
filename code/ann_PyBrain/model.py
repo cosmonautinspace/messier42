@@ -111,8 +111,8 @@ trainer = BackpropTrainer(annG, dataset=trainG, verbose=True, learningrate=0.000
 for i in range(rounds):
     trainer.trainEpochs(1)
 
-NetworkWriter.writeToFile(annRB, f"code/ann_PyBrain/{rbMMax}_RB.xml")
-NetworkWriter.writeToFile(annG, f"code/ann_PyBrain/{gMMax}_G.xml")
+NetworkWriter.writeToFile(annRB, f"code/ann_PyBrain/{rbMMax}_currentSolutionRB.xml")
+NetworkWriter.writeToFile(annG, f"code/ann_PyBrain/{gMMax}_currentSolutionG.xml")
 
 print(testRB)
 print(annRB.activateOnDataset(testRB))
