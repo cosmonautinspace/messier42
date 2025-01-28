@@ -39,7 +39,7 @@ with open("code/ols/currentOlsSolution_RB.txt", "w") as f:
 with open("code/ols/currentOlsSolution_G.txt", "w") as f:
     f.write(ols_g_model.summary().as_text())
 
-np.savetxt("rb_ols_residuals.csv", ols_rb_model.resid, delimiter=",")
-np.savetxt("g_ols_residuals.csv", ols_g_model.resid, delimiter=",")
+np.savetxt("code/ols/rb_ols_residuals.csv", ols_rb_model.resid, delimiter=",")
+np.savetxt("code/ols/g_ols_residuals.csv", ols_g_model.resid, delimiter=",")
 
 print("OLS models saved.")
