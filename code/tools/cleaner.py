@@ -10,13 +10,15 @@ data = pd.read_csv(f'data/scrapedData/{fileName}.csv')
 '''Normalization Pass 1 (only normalizing subpixel values here, multiplication factor values get normalized at the end)
 subpixel values get divided by 255 as it is the max value a pixel can take for an image with a depth of 8 bits
 '''
-for i in range(data["rI"].size):
-    data['rI'].iloc[[i]] /= 255
-    data['gI'].iloc[[i]] /= 255
-    data['bI'].iloc[[i]] /= 255
-    data['rT'].iloc[[i]] /= 255
-    data['gT'].iloc[[i]] /= 255
-    data['bT'].iloc[[i]] /= 255
+
+data['gI'] /= 255
+data['rI'] /= 255
+data['bI'] /= 255
+data['rT'] /= 255
+data['gT'] /= 255
+data['bT'] /= 255
+
+print("Normalization pass 1 complete")
 
 '''Calculating Multiplication factor
 Since CMOS sensors employ the Bayer pattern, which has a 1:2:1 ratio of RGB subpixels, 
@@ -45,6 +47,8 @@ data = data.drop(columns=['rT','gT','bT'])
 data = data.drop_duplicates(keep='first')
 
 data.reset_index(drop=True, inplace=True)
+
+print('multiplication factors computed')
 
 print(data)
 
