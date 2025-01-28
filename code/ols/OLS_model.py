@@ -4,7 +4,7 @@ import statsmodels.api as sm
 from sklearn.model_selection import train_test_split
 import pickle
 
-data = pd.read_csv('data/cleanedData/cleanedDataWhole.csv')
+data = pd.read_csv('data/cleanedData/placeholderData_trainData.csv')
 
 gMMax = data["gM"].max()
 rbMMax = data["rbM"].max()

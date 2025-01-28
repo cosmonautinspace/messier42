@@ -12,7 +12,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.model_selection import train_test_split
 import statsmodels.api as sm
-from pybrain.optimization import HillClimber
 
 
 '''Dataset configuration:
@@ -93,12 +92,12 @@ annG.addConnection(hiddenToOutG)
 annG.sortModules()
 print('model built')
 
-'''Training'''
-'''
+'''Training
+
 trainer = BackpropTrainer(ann, dataset=train, verbose=True, learningrate=0.00001)
 for i in range(rounds):
     trainer.trainEpochs(1)
-
+'''
 
 trainerRB = BackpropTrainer(annRB, dataset=trainRB, verbose=True, learningrate=0.00001)
 trainerG = BackpropTrainer(annG, dataset=trainG, verbose=True, learningrate=0.00001)
@@ -114,15 +113,6 @@ for i in range(rounds):
     g_loss = trainerG.train()
     g_train_losses.append(g_loss)
     g_test_losses.append(trainerG.testOnData(dataset=testG))
-
-'''
-
-'''Black box optimization'''
-
-optimizer = HillClimber(trainG.evaluateModuleMSE, annG, minimize=True)
-
-for i in range(20):
-    optimizer.learn(0)[0]
 
 NetworkWriter.writeToFile(annRB, f"code/ann_PyBrain/{rbMMax}_currentSolutionRB.xml")
 NetworkWriter.writeToFile(annG, f"code/ann_PyBrain/{gMMax}_currentSolutionG.xml")
