@@ -1,7 +1,7 @@
 import csv
 import requests
 
-SourceURL = "https://raw.githubusercontent.com/cosmonautinspace/ANN-Autostretcher-AIBAS-Project/main/data/scrapeFromHere/forScraping.csv"
+SourceURL = "https://raw.githubusercontent.com/cosmonautinspace/ANN-Autostretcher-AIBAS-Project/main/data/scrapeFromHere/pixelValues.csv"
 
 Output = "data/scrapedData/scrapedData.csv"
 
