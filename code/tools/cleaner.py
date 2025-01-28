@@ -7,19 +7,6 @@ import random
 fileName = input("Enter the name of the file to clean >> ")
 data = pd.read_csv(f'data/scrapedData/{fileName}.csv')
 
-'''Normalization Pass 1 (only normalizing subpixel values here, multiplication factor values get normalized at the end)
-subpixel values get divided by 255 as it is the max value a pixel can take for an image with a depth of 8 bits
-'''
-
-data['gI'] /= 255
-data['rI'] /= 255
-data['bI'] /= 255
-data['rT'] /= 255
-data['gT'] /= 255
-data['bT'] /= 255
-
-print("Normalization pass 1 complete")
-
 '''Calculating Multiplication factor
 Since CMOS sensors employ the Bayer pattern, which has a 1:2:1 ratio of RGB subpixels, 
 multiplication factor for Green needs to be calculated seperately.
@@ -53,7 +40,6 @@ print('multiplication factors computed')
 print(data)
 
 data.to_csv(f'data/extras/{fileName}_preproc.csv', sep=',', index=False)
-
 
 # Basic Data cleaning
 data["gM"] = pd.to_numeric(data["gM"],errors="coerce")
@@ -118,6 +104,33 @@ data.drop(to_drop,inplace=True)
 data.reset_index(drop=True, inplace=True)
 
 
+'''Old normalization code ignore for now
+
+gIMean = data['gI'].mean()
+gISD = data['gI'].std()
+rIMean = data['rI'].mean()
+rISD = data['rI'].std()
+bIMean = data['bI'].mean()
+bISD = data['bI'].std()
+
+
+gTMean = data['gT'].mean()
+gTSD = data['gT'].std()
+rTMean = data['rT'].mean()
+rTSD = data['rT'].std()
+bTMean = data['bT'].mean()
+bTSD = data['bT'].std()
+
+
+
+data['rI'] = (data['rI']-rIMean)/rISD
+data['gI'] = (data['gI']-gIMean)/gISD
+data['bI'] = (data['bI']-bIMean)/bISD
+
+
+print("Normalization pass 1 complete")
+'''
+
 '''Normalizing Multiplication factor values'''
 '''Multiplication factors are normalized when the data is loaded so that the normalization factor is stored in memory
 the code for this can be found below but is comented out'''
@@ -130,12 +143,30 @@ for i in range(data["gM"].size):
 
 for i in range(data["rbM"].size):
     data["rbM"].iloc[[i]] /= rbMMax
+
+gMMin = data['gM'].mean()
+gMSD = data['gM'].std()
+rbMMin = data['rbM'].mean()
+rbMSD = data['rbM'].std()
+
+data['gM'] = (data['gM']-gMMin/gMSD)
+data['rbM'] = (data['rbM']-rbMMin/rbMSD)
+
+
+print('normalization pass 2 complete')
+
+normalizationValues = {'gMMean':[gMMin], 'gMSD':[gMSD], 'rbMMean':[rbMMin], 'rMSD': [rbMSD], 
+                       'gIMean' : [gIMean], 'rIMean': [rIMean], 'bIMean': [bIMean],
+                       'gISD': [gISD], 'rISD': [rISD], 'bISD': [bISD]}
+
+normalizationDataframe = pd.DataFrame.from_dict(normalizationValues)
+print(normalizationDataframe)
+
+normalizationDataframe.to_csv(f'data/cleanedData/normFactors.csv', index=False)
 '''
-    
-train, test = train_test_split(data, test_size=0.2, train_size=0.8)
 
 activationData = data.iloc[[f'{random.randint(0,10)}']] 
-
+train, test = train_test_split(data, test_size=0.2, train_size=0.8)
 train.to_csv(f'data/cleanedData/train_data.csv', index=False)
 test.to_csv(f'data/cleanedData/test_data.csv', index=False)
 data.to_csv(f'data/extras/joint_datacollection.csv', index=False)

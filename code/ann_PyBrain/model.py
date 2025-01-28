@@ -18,14 +18,8 @@ import statsmodels.api as sm
 RGB subpixel values as input variables (3)
 RedBlueMultiplicationFactor and GreenMultiplicationFactor as the target variables (2)'''
 
-data = pd.read_csv('data/cleanedData/placeholderData_trainData.csv')
+data = pd.read_csv('data/extras/scrapedData_preproc.csv')
 
-
-'''Normalization of multiplication factors'''
-gMMax = data["gM"].max()
-rbMMax = data["rbM"].max()
-data["gM"] = data["gM"] / gMMax
-data["rbM"] = data["rbM"] / rbMMax
 
 print('data read')
 alldataG = SupervisedDataSet(inp=1, target=1)
@@ -44,7 +38,7 @@ print('data split')
 purposes'''
 
 hiddenLayers = 100
-rounds = 1
+rounds = 20
 
 '''
 ann = FeedForwardNetwork()
@@ -114,8 +108,8 @@ for i in range(rounds):
     g_train_losses.append(g_loss)
     g_test_losses.append(trainerG.testOnData(dataset=testG))
 
-NetworkWriter.writeToFile(annRB, f"code/ann_PyBrain/{rbMMax}_currentSolutionRB.xml")
-NetworkWriter.writeToFile(annG, f"code/ann_PyBrain/{gMMax}_currentSolutionG.xml")
+NetworkWriter.writeToFile(annRB, f"code/ann_PyBrain/currentSolutionRB.xml")
+NetworkWriter.writeToFile(annG, f"code/ann_PyBrain/currentSolutionG.xml")
 
 np.savetxt("code/ann_PyBrain/rb_train_losses.csv", rb_train_losses, delimiter=",")
 np.savetxt("code/ann_PyBrain/rb_test_losses.csv", rb_test_losses, delimiter=",")
