@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import statsmodels.api as sm
 from sklearn.model_selection import train_test_split
 import pickle
@@ -37,5 +38,8 @@ with open("code/ols/currentOlsSolution_RB.txt", "w") as f:
     f.write(ols_rb_model.summary().as_text())
 with open("code/ols/currentOlsSolution_G.txt", "w") as f:
     f.write(ols_g_model.summary().as_text())
+
+np.savetxt("code/ols/rb_ols_residuals.csv", ols_rb_model.resid, delimiter=",")
+np.savetxt("code/ols/g_ols_residuals.csv", ols_g_model.resid, delimiter=",")
 
 print("OLS models saved.")
