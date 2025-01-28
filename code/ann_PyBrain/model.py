@@ -12,13 +12,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.model_selection import train_test_split
 import statsmodels.api as sm
+from pybrain.optimization import HillClimber
 
 
 '''Dataset configuration:
 RGB subpixel values as input variables (3)
 RedBlueMultiplicationFactor and GreenMultiplicationFactor as the target variables (2)'''
 
-data = pd.read_csv('data/cleanedData/train_data.csv')
+data = pd.read_csv('data/cleanedData/placeholderData_trainData.csv')
 
 
 '''Normalization of multiplication factors'''
@@ -101,7 +102,7 @@ print('model built')
 trainer = BackpropTrainer(ann, dataset=train, verbose=True, learningrate=0.00001)
 for i in range(rounds):
     trainer.trainEpochs(1)
-'''
+
 
 trainer = BackpropTrainer(annRB, dataset=trainRB, verbose=True, learningrate=0.00001)
 for i in range(rounds):
@@ -110,6 +111,15 @@ for i in range(rounds):
 trainer = BackpropTrainer(annG, dataset=trainG, verbose=True, learningrate=0.00001)
 for i in range(rounds):
     trainer.trainEpochs(1)
+
+'''
+
+'''Black box optimization'''
+
+optimizer = HillClimber(trainG.evaluateModuleMSE, annG, minimize=True)
+
+for i in range(20):
+    optimizer.learn(0)[0]
 
 NetworkWriter.writeToFile(annRB, f"code/ann_PyBrain/{rbMMax}_currentSolutionRB.xml")
 NetworkWriter.writeToFile(annG, f"code/ann_PyBrain/{gMMax}_currentSolutionG.xml")
