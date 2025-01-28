@@ -18,7 +18,7 @@ import statsmodels.api as sm
 RGB subpixel values as input variables (3)
 RedBlueMultiplicationFactor and GreenMultiplicationFactor as the target variables (2)'''
 
-data = pd.read_csv('data/extras/scrapedData_preproc.csv')
+data = pd.read_csv('data/cleanedData/train_data.csv')
 
 
 print('data read')
@@ -38,7 +38,7 @@ print('data split')
 purposes'''
 
 hiddenLayers = 100
-rounds = 20
+rounds = 5
 
 '''
 ann = FeedForwardNetwork()
@@ -60,7 +60,7 @@ ann.sortModules()
 annRB = FeedForwardNetwork()
 
 inLayerRB = LinearLayer(2)
-hiddenLayerRB = TanhLayer(hiddenLayers)
+hiddenLayerRB = SigmoidLayer(hiddenLayers)
 outLayerRB = LinearLayer(1)
 annRB.addInputModule(inLayerRB)
 annRB.addModule(hiddenLayerRB)
@@ -74,7 +74,7 @@ annRB.sortModules()
 annG = FeedForwardNetwork()
 
 inLayerG = LinearLayer(1)
-hiddenLayerG = TanhLayer(hiddenLayers)
+hiddenLayerG = SigmoidLayer(hiddenLayers)
 outLayerG = LinearLayer(1)
 annG.addInputModule(inLayerG)
 annG.addModule(hiddenLayerG)

@@ -104,8 +104,6 @@ data.drop(to_drop,inplace=True)
 data.reset_index(drop=True, inplace=True)
 
 
-'''Old normalization code ignore for now
-
 gIMean = data['gI'].mean()
 gISD = data['gI'].std()
 rIMean = data['rI'].mean()
@@ -114,35 +112,18 @@ bIMean = data['bI'].mean()
 bISD = data['bI'].std()
 
 
-gTMean = data['gT'].mean()
-gTSD = data['gT'].std()
-rTMean = data['rT'].mean()
-rTSD = data['rT'].std()
-bTMean = data['bT'].mean()
-bTSD = data['bT'].std()
-
-
-
 data['rI'] = (data['rI']-rIMean)/rISD
 data['gI'] = (data['gI']-gIMean)/gISD
 data['bI'] = (data['bI']-bIMean)/bISD
 
 
 print("Normalization pass 1 complete")
-'''
+
 
 '''Normalizing Multiplication factor values'''
 '''Multiplication factors are normalized when the data is loaded so that the normalization factor is stored in memory
 the code for this can be found below but is comented out'''
 
-'''
-gMMax = data["gM"].max()
-rbMMax = data["rbM"].max()
-for i in range(data["gM"].size):
-    data["gM"].iloc[[i]] /= gMMax
-
-for i in range(data["rbM"].size):
-    data["rbM"].iloc[[i]] /= rbMMax
 
 gMMin = data['gM'].mean()
 gMSD = data['gM'].std()
@@ -163,7 +144,7 @@ normalizationDataframe = pd.DataFrame.from_dict(normalizationValues)
 print(normalizationDataframe)
 
 normalizationDataframe.to_csv(f'data/cleanedData/normFactors.csv', index=False)
-'''
+
 
 activationData = data.iloc[[f'{random.randint(0,10)}']] 
 train, test = train_test_split(data, test_size=0.2, train_size=0.8)
