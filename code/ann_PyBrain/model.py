@@ -28,13 +28,11 @@ data["gM"] = data["gM"] / gMMax
 data["rbM"] = data["rbM"] / rbMMax
 
 print('data read')
-alldataG = SupervisedDataSet(inp=1,target=1)
-alldataRB = SupervisedDataSet(inp=2,target=1)
+alldataG = SupervisedDataSet(inp=1, target=1)
+alldataRB = SupervisedDataSet(inp=2, target=1)
 for i in range(data['rI'].size):
     alldataG.addSample(inp=data.gI[i], target=data.gM[i])
-
-for i in range(data['rI'].size):
-    alldataRB.addSample(inp=[data.rI[i],data.bI[i]], target=[data.rbM[i]])
+    alldataRB.addSample(inp=[data.rI[i], data.bI[i]], target=[data.rbM[i]])
 print('data prepped')
 
 testG, trainG = alldataG.splitWithProportion(0.2)
@@ -67,32 +65,30 @@ ann.sortModules()
 
 annRB = FeedForwardNetwork()
 
-inLayer = LinearLayer(2)
-hiddenLayer = TanhLayer(hiddenLayers)
-outLayer = LinearLayer(1)
-annRB.addInputModule(inLayer)
-annRB.addModule(hiddenLayer)
-annRB.addOutputModule(outLayer)
-
-inToHidden = FullConnection(inLayer,hiddenLayer)
-hiddenToOut = FullConnection(hiddenLayer,outLayer)
-annRB.addConnection(inToHidden)
-annRB.addConnection(hiddenToOut)
+inLayerRB = LinearLayer(2)
+hiddenLayerRB = TanhLayer(hiddenLayers)
+outLayerRB = LinearLayer(1)
+annRB.addInputModule(inLayerRB)
+annRB.addModule(hiddenLayerRB)
+annRB.addOutputModule(outLayerRB)
+inToHiddenRB = FullConnection(inLayerRB, hiddenLayerRB)
+hiddenToOutRB = FullConnection(hiddenLayerRB, outLayerRB)
+annRB.addConnection(inToHiddenRB)
+annRB.addConnection(hiddenToOutRB)
 annRB.sortModules()
 
 annG = FeedForwardNetwork()
 
-inLayer = LinearLayer(1)
-hiddenLayer = TanhLayer(hiddenLayers)
-outLayer = LinearLayer(1)
-annG.addInputModule(inLayer)
-annG.addModule(hiddenLayer)
-annG.addOutputModule(outLayer)
-
-inToHidden = FullConnection(inLayer,hiddenLayer)
-hiddenToOut = FullConnection(hiddenLayer,outLayer)
-annG.addConnection(inToHidden)
-annG.addConnection(hiddenToOut)
+inLayerG = LinearLayer(1)
+hiddenLayerG = TanhLayer(hiddenLayers)
+outLayerG = LinearLayer(1)
+annG.addInputModule(inLayerG)
+annG.addModule(hiddenLayerG)
+annG.addOutputModule(outLayerG)
+inToHiddenG = FullConnection(inLayerG, hiddenLayerG)
+hiddenToOutG = FullConnection(hiddenLayerG, outLayerG)
+annG.addConnection(inToHiddenG)
+annG.addConnection(hiddenToOutG)
 annG.sortModules()
 print('model built')
 
@@ -103,21 +99,26 @@ for i in range(rounds):
     trainer.trainEpochs(1)
 '''
 
-trainer = BackpropTrainer(annRB, dataset=trainRB, verbose=True, learningrate=0.00001)
-for i in range(rounds):
-    trainer.trainEpochs(1)
+trainerRB = BackpropTrainer(annRB, dataset=trainRB, verbose=True, learningrate=0.00001)
+trainerG = BackpropTrainer(annG, dataset=trainG, verbose=True, learningrate=0.00001)
 
-trainer = BackpropTrainer(annG, dataset=trainG, verbose=True, learningrate=0.00001)
+rb_train_losses, rb_test_losses = [], []
+g_train_losses, g_test_losses = [], []
+
 for i in range(rounds):
-    trainer.trainEpochs(1)
+    rb_loss = trainerRB.train()
+    rb_train_losses.append(rb_loss)
+    rb_test_losses.append(trainerRB.testOnData(dataset=testRB))
+
+    g_loss = trainerG.train()
+    g_train_losses.append(g_loss)
+    g_test_losses.append(trainerG.testOnData(dataset=testG))
 
 NetworkWriter.writeToFile(annRB, f"code/ann_PyBrain/{rbMMax}_currentSolutionRB.xml")
 NetworkWriter.writeToFile(annG, f"code/ann_PyBrain/{gMMax}_currentSolutionG.xml")
 
-print(testRB)
-print(annRB.activateOnDataset(testRB))
+np.savetxt("code/ann_PyBrain/rb_train_losses.csv", rb_train_losses, delimiter=",")
+np.savetxt("code/ann_PyBrain/rb_test_losses.csv", rb_test_losses, delimiter=",")
+np.savetxt("code/ann_PyBrain/g_train_losses.csv", g_train_losses, delimiter=",")
+np.savetxt("code/ann_PyBrain/g_test_losses.csv", g_test_losses, delimiter=",")
 
-print(testG)
-print(annG.activateOnDataset(testG))
-
-print(annRB.activate([50,50]))
