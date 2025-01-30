@@ -10,7 +10,7 @@ inputImage=input("Enter the name of the input image(placed in the input folder) 
 
 
 
-image = Image.open(f'data/images/input/{inputImage}')
+image = Image.open(f'data/photos/input/{inputImage}')
 annRB = NetworkReader.readFrom(f"code/ann_PyBrain/{redModel}.xml")
 annG = NetworkReader.readFrom(f"code/ann_PyBrain/{greenModel}.xml")
 
@@ -37,4 +37,4 @@ for r in range(image.height):
         rG= annG.activate([(pixelValue[1]-gMean)/gSD])
         image.putpixel((c,r),((pixelValue[0])*math.ceil((rbM*rbMSD)+rbMMean),pixelValue[1]*math.ceil((rG*gMSD)+gMMean),pixelValue[2]*math.ceil((rbM*rbMSD)+rbMMean)))
 
-image.save(f'data/images/output/{inputImage}')
+image.save(f'data/photos/output/{inputImage}')

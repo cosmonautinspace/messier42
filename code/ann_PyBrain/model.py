@@ -1,5 +1,4 @@
 import pandas as pd 
-from pybrain.tools.shortcuts import buildNetwork
 from pybrain.datasets import SupervisedDataSet
 from pybrain.structure import FeedForwardNetwork 
 from pybrain.supervised import BackpropTrainer
@@ -7,11 +6,7 @@ from pybrain.structure.modules import SoftmaxLayer, LinearLayer, SigmoidLayer, T
 #from pybrain.utilities import percentError
 from pybrain.structure import FullConnection
 from pybrain.tools.customxml.networkwriter import NetworkWriter
-import random
-import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.model_selection import train_test_split
-import statsmodels.api as sm
 
 
 '''Dataset configuration:
@@ -21,7 +16,6 @@ RedBlueMultiplicationFactor and GreenMultiplicationFactor as the target variable
 data = pd.read_csv('data/cleanedData/train_data.csv')
 testData = pd.read_csv('data/cleanedData/test_data.csv')
 
-
 print('data read')
 alldataG = SupervisedDataSet(inp=1, target=1)
 alldataRB = SupervisedDataSet(inp=2, target=1)
@@ -29,19 +23,26 @@ for i in range(data['rI'].size):
     alldataG.addSample(inp=data.gI[i], target=data.gM[i])
     alldataRB.addSample(inp=[data.rI[i], data.bI[i]], target=[data.rbM[i]])
 
+testDataG = SupervisedDataSet(inp=1, target=1)
+testDataRB = SupervisedDataSet(inp=2, target=1)
+for i in range(testData['rI'].size):
+    testDataG.addSample(inp=data.gI[i], target=data.gM[i])
+    testDataRB.addSample(inp=[data.rI[i], data.bI[i]], target=[data.rbM[i]])
 
 print('data prepped')
 
-testG, trainG = alldataG.splitWithProportion(0.2)
+trainG = alldataG
+trainRB = alldataRB
 
-testRB, trainRB = alldataRB.splitWithProportion(0.2)
+testG = testDataG
+testRB = testDataRB
 print('data split')
 
 '''Model configuration can be found below, need to optimize before final submission of the project....Just placeholder values for now, for testing 
 purposes'''
 
 hiddenLayers = 100
-rounds = 5
+rounds = 30
 
 '''
 ann = FeedForwardNetwork()
