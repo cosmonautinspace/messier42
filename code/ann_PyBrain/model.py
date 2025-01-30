@@ -19,6 +19,7 @@ RGB subpixel values as input variables (3)
 RedBlueMultiplicationFactor and GreenMultiplicationFactor as the target variables (2)'''
 
 data = pd.read_csv('data/cleanedData/train_data.csv')
+testData = pd.read_csv('data/cleanedData/test_data.csv')
 
 
 print('data read')
@@ -27,6 +28,8 @@ alldataRB = SupervisedDataSet(inp=2, target=1)
 for i in range(data['rI'].size):
     alldataG.addSample(inp=data.gI[i], target=data.gM[i])
     alldataRB.addSample(inp=[data.rI[i], data.bI[i]], target=[data.rbM[i]])
+
+
 print('data prepped')
 
 testG, trainG = alldataG.splitWithProportion(0.2)
@@ -111,8 +114,8 @@ for i in range(rounds):
 NetworkWriter.writeToFile(annRB, f"code/ann_PyBrain/currentSolutionRB.xml")
 NetworkWriter.writeToFile(annG, f"code/ann_PyBrain/currentSolutionG.xml")
 
-np.savetxt("code/ann_PyBrain/rb_train_losses.csv", rb_train_losses, delimiter=",")
-np.savetxt("code/ann_PyBrain/rb_test_losses.csv", rb_test_losses, delimiter=",")
-np.savetxt("code/ann_PyBrain/g_train_losses.csv", g_train_losses, delimiter=",")
-np.savetxt("code/ann_PyBrain/g_test_losses.csv", g_test_losses, delimiter=",")
+np.savetxt("documentation/visualizations/source/ann_PyBrain/rb_train_losses.csv", rb_train_losses, delimiter=",")
+np.savetxt("documentation/visualizations/source/ann_PyBrain/rb_test_losses.csv", rb_test_losses, delimiter=",")
+np.savetxt("documentation/visualizations/source/ann_PyBrain/g_train_losses.csv", g_train_losses, delimiter=",")
+np.savetxt("documentation/visualizations/source/ann_PyBrain/g_test_losses.csv", g_test_losses, delimiter=",")
 
