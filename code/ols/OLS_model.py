@@ -3,13 +3,9 @@ import numpy as np
 import statsmodels.api as sm
 from sklearn.model_selection import train_test_split
 import pickle
+from UE_04_LinearRegDiagnostic import LinearRegDiagnostic
 
-data = pd.read_csv('data/cleanedData/placeholderData_trainData.csv')
-
-gMMax = data["gM"].max()
-rbMMax = data["rbM"].max()
-data["gM"] = data["gM"] / gMMax
-data["rbM"] = data["rbM"] / rbMMax
+data = pd.read_csv('data/cleanedData/train_data.csv')
 
 X_rb = data[['rI', 'bI']]
 y_rb = data['rbM']
@@ -41,5 +37,18 @@ with open("code/ols/currentOlsSolution_G.txt", "w") as f:
 
 np.savetxt("documentation/visualizations/source/ols/rb_ols_residuals.csv", ols_rb_model.resid, delimiter=",")
 np.savetxt("documentation/visualizations/source/ols/g_ols_residuals.csv", ols_g_model.resid, delimiter=",")
+
+cls = LinearRegDiagnostic(ols_g_model)
+vif, fig, ax= cls()
+print(vif)
+
+fig.savefig('documentation/visualizations/GreenChannelDiagnosticPlots.pdf', pad_inches=0.3, format="pdf")
+
+
+cls = LinearRegDiagnostic(ols_rb_model)
+vif, fig, ax= cls()
+print(vif)
+
+fig.savefig('documentation/visualizations/Red&BlueChannelDiagnosticPlots.pdf', pad_inches=0.3, format="pdf")
 
 print("OLS models saved.")
