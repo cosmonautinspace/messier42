@@ -4,15 +4,15 @@ import math
 import pandas as pd
 '''This script is for the final adjustment of pixel values of a given unstrectched image'''
 
-greenModel = input("Enter the name of the model to use for the Green Channel >> ")
-redModel = input("Enter the name of the model to use for the Red and Blue channels >> ")
-inputImage=input("Enter the name of the input image(placed in the input folder) >> ")
+#greenModel = input("Enter the name of the model to use for the Green Channel >> ")
+#redModel = input("Enter the name of the model to use for the Red and Blue channels >> ")
+#inputImage=input("Enter the name of the input image(placed in the input folder) >> ")
 
 
 
-image = Image.open(f'data/photos/input/{inputImage}')
-annRB = NetworkReader.readFrom(f"code/ann_PyBrain/{redModel}.xml")
-annG = NetworkReader.readFrom(f"code/ann_PyBrain/{greenModel}.xml")
+image = Image.open(f'data/photos/input/temp.tif')
+annRB = NetworkReader.readFrom(f"code/ann_PyBrain/currentSolutionRB.xml")
+annG = NetworkReader.readFrom(f"code/ann_PyBrain/currentSolutionG.xml")
 
 
 normDf = pd.read_csv('data/cleanedData/normFactors.csv')
@@ -35,6 +35,7 @@ for r in range(image.height):
         pixelValue = image.getpixel((c,r))
         rbM = annRB.activate([(pixelValue[0]-rMean)/rSD,(pixelValue[2]-bMean)/bSD])
         rG= annG.activate([(pixelValue[1]-gMean)/gSD])
-        image.putpixel((c,r),((pixelValue[0])*math.ceil((rbM*rbMSD)+rbMMean),pixelValue[1]*math.ceil((rG*gMSD)+gMMean),pixelValue[2]*math.ceil((rbM*rbMSD)+rbMMean)))
+        image.putpixel((c,r),((pixelValue[0])*int((rbM*rbMSD)+rbMMean),pixelValue[1]*int((rG*gMSD)+gMMean),pixelValue[2]*int((rbM*rbMSD)+rbMMean)))
 
-image.save(f'data/photos/output/{inputImage}')
+
+image.save(f'data/photos/output/temp2S.tif')

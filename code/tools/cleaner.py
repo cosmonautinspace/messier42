@@ -19,10 +19,10 @@ gMfactor = []
 
 #calculating the multiplication factors for
 for index, row in data.iterrows():
-    rFactor = int(row['rT']/row['rI'])
-    bFactor = int(row['bT']/row['bI'])
-    gFactor = int(row['gT']/row['gI'])
-    averageBR = int((rFactor+bFactor)/2)
+    rFactor = row['rT']/row['rI']
+    bFactor = row['bT']/row['bI']
+    gFactor = row['gT']/row['gI']
+    averageBR = (rFactor+bFactor)/2
     rbMfactor.append(averageBR)
     gMfactor.append(gFactor)
 
@@ -103,7 +103,12 @@ for i in range(0,zscorerbM.size):
 data.drop(to_drop,inplace=True)
 data.reset_index(drop=True, inplace=True)
 
+untrain, untest = train_test_split(data, test_size=0.2, train_size=0.8)
+untrain.to_csv(f'data/cleanedData/unnormalized_train_data.csv', index=False)
+untest.to_csv(f'data/cleanedData/unnormalized_test_data.csv', index=False)
+data.to_csv(f'data/extras/unnormalized_joint_datacollection.csv', index=False)
 
+'''Normalization'''
 gIMean = data['gI'].mean()
 gISD = data['gI'].std()
 rIMean = data['rI'].mean()
