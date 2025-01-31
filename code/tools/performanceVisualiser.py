@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from pybrain.tools.customxml.networkreader import NetworkReader
+import statsmodels.api as sm
 
 
 test = pd.read_csv('data/cleanedData/test_data.csv')

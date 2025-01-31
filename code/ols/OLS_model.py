@@ -4,16 +4,21 @@ import statsmodels.api as sm
 from sklearn.model_selection import train_test_split
 import pickle
 from UE_04_LinearRegDiagnostic import LinearRegDiagnostic
+import matplotlib.pyplot as plt 
 
 data = pd.read_csv('data/cleanedData/train_data.csv')
+testdf = pd.read_csv('data/cleanedData/test_data.csv')
 
-X_rb = data[['rI', 'bI']]
-y_rb = data['rbM']
-X_g = data[['gI']]
-y_g = data['gM']
 
-X_rb_train, X_rb_test, y_rb_train, y_rb_test = train_test_split(X_rb, y_rb, test_size=0.2, random_state=44)
-X_g_train, X_g_test, y_g_train, y_g_test = train_test_split(X_g, y_g, test_size=0.2, random_state=44)
+X_rb_train = data[['rI', 'bI']]
+X_rb_test = testdf[['rI', 'bI']] 
+y_rb_train = data['rbM']
+y_rb_test = testdf['rbM']
+
+X_g_train = data['gI'] 
+X_g_test = testdf['gI']
+y_g_train = data['gM']
+y_g_test = testdf['gM']
 
 X_rb_train_sm = sm.add_constant(X_rb_train)
 ols_rb_model = sm.OLS(y_rb_train, X_rb_train_sm).fit()
@@ -52,3 +57,33 @@ print(vif)
 fig.savefig('documentation/visualizations/Red&BlueChannelDiagnosticPlots.pdf', format="pdf")
 
 print("OLS models saved.")
+
+predictedG = ols_g_model.predict(X_g_test_sm)
+predictedRB = ols_rb_model.predict(X_rb_test_sm)
+
+plt.scatter(testdf['gI'], testdf['gM'], c='green',s=1)
+plt.scatter(testdf['gI'], predictedG, c='orange', s=1)
+plt.xlabel('Green sub pixel values (Mean normalized)')
+plt.ylabel('Multiplication Factor (Mean normalized)')
+plt.legend(['Actual', 'Predicted'])
+plt.title('OLS Model Performance - Green Channel')
+plt.savefig('documentation/visualizations/OLS_green_performance.png')
+plt.close()
+
+plt.scatter(testdf['rI'], testdf['rbM'], c='red',s=1)
+plt.scatter(testdf['rI'], predictedRB, c='orange', s=1)
+plt.xlabel('Red sub pixel values (Mean normalized)')
+plt.ylabel('Multiplication Factor (Mean normalized)')
+plt.legend(['Actual', 'Predicted'])
+plt.title('OLS Model Performance - Red Channel')
+plt.savefig('documentation/visualizations/OLS_red_performance.png')
+plt.close()
+
+plt.scatter(testdf['bI'], testdf['rbM'], c='blue',s=1)
+plt.scatter(testdf['rI'], predictedG, c='orange', s=1)
+plt.xlabel('Blue sub pixel values (Mean normalized)')
+plt.ylabel('Multiplication Factor (Mean normalized)')
+plt.legend(['Actual', 'Predicted'])
+plt.title('OLS Model Performance - Blue Channel')
+plt.savefig('documentation/visualizations/OLS_blue_performance.png')
+plt.close()
