@@ -3,8 +3,8 @@
 Dep. Variable:                    rbM   R-squared:                       0.987
 Model:                            OLS   Adj. R-squared:                  0.987
 Method:                 Least Squares   F-statistic:                 1.811e+05
-Date:                Thu, 30 Jan 2025   Prob (F-statistic):               0.00
-Time:                        14:09:11   Log-Likelihood:                 6945.3
+Date:                Fri, 31 Jan 2025   Prob (F-statistic):               0.00
+Time:                        14:15:45   Log-Likelihood:                 6945.3
 No. Observations:                4921   AIC:                        -1.388e+04
 Df Residuals:                    4918   BIC:                        -1.387e+04
 Df Model:                           2                                         

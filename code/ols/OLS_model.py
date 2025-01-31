@@ -42,13 +42,13 @@ cls = LinearRegDiagnostic(ols_g_model)
 vif, fig, ax= cls()
 print(vif)
 
-fig.savefig('documentation/visualizations/GreenChannelDiagnosticPlots.pdf', pad_inches=0.3, format="pdf")
+fig.savefig('documentation/visualizations/GreenChannelDiagnosticPlots.pdf', format="pdf")
 
 
 cls = LinearRegDiagnostic(ols_rb_model)
 vif, fig, ax= cls()
 print(vif)
 
-fig.savefig('documentation/visualizations/Red&BlueChannelDiagnosticPlots.pdf', pad_inches=0.3, format="pdf")
+fig.savefig('documentation/visualizations/Red&BlueChannelDiagnosticPlots.pdf', format="pdf")
 
 print("OLS models saved.")

@@ -28,8 +28,6 @@ rSD = normDf.rISD[0]
 gSD = normDf.gISD[0]
 bSD = normDf.bISD[0]
 
-
-
 for r in range(image.height):
     for c in range(image.width):
         pixelValue = image.getpixel((c,r))
