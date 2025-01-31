@@ -10,11 +10,11 @@ import pandas as pd
 
 
 
-image = Image.open(f'data/photos/input/temp.tif')
+image = Image.open(f'data/photos/input/orion8bit.tif')
 annRB = NetworkReader.readFrom(f"code/ann_PyBrain/currentSolutionRB.xml")
 annG = NetworkReader.readFrom(f"code/ann_PyBrain/currentSolutionG.xml")
 
-
+'''renormalization of values'''
 normDf = pd.read_csv('data/cleanedData/normFactors.csv')
 gMMean = normDf.gMMean[0]
 gMSD = normDf.gMSD[0]
@@ -35,7 +35,10 @@ for r in range(image.height):
         pixelValue = image.getpixel((c,r))
         rbM = annRB.activate([(pixelValue[0]-rMean)/rSD,(pixelValue[2]-bMean)/bSD])
         rG= annG.activate([(pixelValue[1]-gMean)/gSD])
-        image.putpixel((c,r),((pixelValue[0])*int((rbM*rbMSD)+rbMMean),pixelValue[1]*int((rG*gMSD)+gMMean),pixelValue[2]*int((rbM*rbMSD)+rbMMean)))
+        red = (pixelValue[0])*((rbM*rbMSD)+rbMMean)
+        green = (pixelValue[1]*((rG*gMSD)+gMMean))
+        blue = (pixelValue[2]*((rbM*rbMSD)+rbMMean))
+        image.putpixel((c,r), (round(red[0]), round(green[0]), round(blue[0])))
 
 
 image.save(f'data/photos/output/temp2S.tif')
