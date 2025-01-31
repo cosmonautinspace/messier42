@@ -11,7 +11,7 @@ import pandas as pd
 
 
 image = Image.open(f'data/photos/input/temp.tif')
-annG = NetworkReader.readFrom(f"code/ann_PyBrain/tempcurrentSolution.xml")
+annG = NetworkReader.readFrom(f"code/ann_PyBrain/currentSolution.xml")
 
 '''renormalization of values'''
 normDf = pd.read_csv('data/cleanedData/normFactors.csv')
