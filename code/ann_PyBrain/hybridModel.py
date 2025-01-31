@@ -62,7 +62,7 @@ for i in range(rounds):
     train_losses.append(model_loss)
     test_losses.append(trainer.testOnData(dataset=test))
 
-NetworkWriter.writeToFile(ann, f"code/ann_PyBrain/tempcurrentSolution.xml")
+NetworkWriter.writeToFile(ann, f"code/ann_PyBrain/currentSolution.xml")
 
 np.savetxt("documentation/visualizations/source/ann_PyBrain/train_losses.csv", train_losses, delimiter=",")
 np.savetxt("documentation/visualizations/source/ann_PyBrain/test_losses.csv", test_losses, delimiter=",")
