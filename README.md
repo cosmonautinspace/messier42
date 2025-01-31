@@ -35,6 +35,14 @@ This subfolder contains all the individual python scripts that are a part of the
 5. `visualiser.py` - This script is used to create the required visualisations.
 6. `csvSplitter.py` - This script is used to create smaller csv files from a given input csv file.
 
+##### 1.3.1) Visualisers
+This subfolder contains all the scripts for visualisations found in the documentation/visualisations folder. The scripts are:
+1. `dataVisualiser.py` - This script is used to create visualisations from the scraped and cleaned data.
+2. `performanceVisualiser.py` - This script is used to create scatter plots that visualise the performance of the ANN.
+3. `visualiser.py` - This script is used to create visualisations not mentioned above.
+
+Note: This folder does not contain the code for all visualisations found in the visualisations folder, namely the diagnostic plots for the OLS model, which were made when the model was created and are present in the `OLS_model.py` script.
+
 ### 2) Data
 This folder contains the CSV and images used to train and test the ANN model.
 
