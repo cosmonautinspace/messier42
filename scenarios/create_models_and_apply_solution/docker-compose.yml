@@ -1,4 +1,4 @@
-name: messier42_createANN&OLS
+name: messier42_create_ann_and_apply_solution
 
 services:
   activationBase:
@@ -8,6 +8,14 @@ services:
         source: ./ai_system
         target: /tmp/ai_system
     command: cp -r /tmp/activationBase /tmp/ai_system/
+
+  knowledgeBase:
+    image: knowledgebase
+    volumes:
+      - type: bind
+        source: ./ai_system
+        target: /tmp/ai_system
+    command: cp -r /tmp/knowledgeBase /tmp/ai_system/
 
   learningBase:
     image: learningbase
@@ -23,7 +31,7 @@ services:
       - type: bind
         source: ./ai_system
         target: /tmp/ai_system
-    command: bash -c "python3 /tmp/codeBase/ann_model/hybridModel.py && python3 /tmp/codeBase/ols_model/OLS_model.py" 
+    command: bash -c "python3 /tmp/codeBase/ann_model/hybridModel.py && python3 /tmp/codeBase/ols_model/OLS_model.py && python3 /tmp/codeBase/editor.py" 
 
 volumes:
   myvol:
