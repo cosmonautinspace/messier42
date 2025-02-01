@@ -1,4 +1,5 @@
 FROM busybox:latest
-COPY train_data.csv /tmp/learningBase/train/
-COPY test_data.csv /tmp/learningBase/validation/
-COPY README.md /tmp/readme
+WORKDIR /tmp/learningBase
+ADD train_data.csv /tmp/learningBase/train/
+ADD test_data.csv /tmp/learningBase/validation/
+ADD README.md /tmp/readme

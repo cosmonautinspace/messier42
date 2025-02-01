@@ -1,0 +1,29 @@
+name: testapp
+
+services:
+  activationBase:
+    image: testactivationbase
+    volumes:
+      - type: bind
+        source: ./ai_system
+        target: /tmp/ai_system
+    command: cp -r /tmp/activationBase /tmp/ai_system/
+
+  knowledgeBase:
+    image: testlearningbase
+    volumes:
+      - type: bind
+        source: ./ai_system
+        target: /tmp/ai_system
+    command: cp -r /tmp/learningBase /tmp/ai_system/
+
+  codeBase:
+    image: testcodebase
+    volumes:
+      - type: bind
+        source: ./ai_system
+        target: /tmp/ai_system
+    command: bash -c "python3 /tmp/codeBase/ann_model/hybridModel.py && python3 /tmp/codeBase/ols_model/OLS_model.py" 
+
+volumes:
+  myvol:

@@ -1,3 +1,5 @@
+import sys
+sys.path.append("/tmp/codeBase/pybrain")
 import pandas as pd 
 from pybrain.datasets import SupervisedDataSet
 from pybrain.structure import FeedForwardNetwork 
@@ -13,8 +15,8 @@ import numpy as np
 RGB subpixel values as input variables (3)
 RedBlueMultiplicationFactor and GreenMultiplicationFactor as the target variables (2)'''
 
-data = pd.read_csv('/tmp/ai_system/train_data.csv')
-testdf = pd.read_csv('/tmp/ai_system/test_data.csv')
+data = pd.read_csv('/tmp/ai_system/learningBase/train/train_data.csv')
+testdf = pd.read_csv('/tmp/ai_system/learningBase/validation/test_data.csv')
 
 print('data read')
 alldata = SupervisedDataSet(inp=3, target=2)
@@ -34,7 +36,7 @@ print('data split')
 
 
 hiddenLayers = 250
-rounds = 100
+rounds = 1
 
 ann = FeedForwardNetwork()
 

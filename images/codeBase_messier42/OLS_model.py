@@ -6,8 +6,8 @@ import pickle
 from UE_04_LinearRegDiagnostic import LinearRegDiagnostic
 import matplotlib.pyplot as plt 
 
-data = pd.read_csv('/tmp/ai_system/train_data.csv')
-testdf = pd.read_csv('/tmp/ai_system/test_data.csv')
+data = pd.read_csv('/tmp/ai_system/learningBase/train/train_data.csv')
+testdf = pd.read_csv('/tmp/ai_system/learningBase/validation/test_data.csv')
 
 
 X_rb_train = data[['rI', 'bI']]

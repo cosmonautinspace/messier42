@@ -11,14 +11,14 @@ import statsmodels.api as sm
 #redModel = input("Enter the name of the model to use for the Red and Blue channels >> ")
 #inputImage=input("Enter the name of the input image(placed in the input folder) >> ")
 
-image = Image.open(f'/tmp/ai_system/activation_image.tif')
-annG = NetworkReader.readFrom(f"/tmp/ai_system/currentSolution.xml")
-activationdf = pd.read_csv(f'/tmp/ai_system/activation_data.csv')
-olsG = sm.load('/tmp/ai_system/currentOlsSolution_G.pkl')
-olsRB = sm.oad('/tmp/ai_system/currentOlsSolution_RB')
+image = Image.open(f'/tmp/ai_system/activationBase/activation_image.tif')
+annG = NetworkReader.readFrom(f"/tmp/ai_system/knowledgeBase/currentSolution.xml")
+activationdf = pd.read_csv(f'/tmp/ai_system/activationBase/activation_data.csv')
+olsG = sm.load('/tmp/ai_system/knowledgeBase/currentOlsSolution_G.pkl')
+olsRB = sm.oad('/tmp/ai_system/knowledgeBase/currentOlsSolution_RB')
 
 '''renormalization of values'''
-normDf = pd.read_csv('/tmp/ai_system/normFactors.csv')
+normDf = pd.read_csv('/tmp/ai_system/activationBase/normFactors.csv')
 gMMean = normDf.gMMean[0]
 gMSD = normDf.gMSD[0]
 rbMMean = normDf.rbMMean[0]
