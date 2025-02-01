@@ -1,0 +1,29 @@
+name: messier42_applySolution
+
+services:
+  activationBase:
+    image: activationbase
+    volumes:
+      - type: bind
+        source: ./ai_system
+        target: /tmp/ai_system
+    command: cp -r /tmp/activationBase /tmp/ai_system/
+
+  knowledgeBase:
+    image: knowledgebase
+    volumes:
+      - type: bind
+        source: ./ai_system
+        target: /tmp/ai_system
+    command: cp -r /tmp/knowledgeBase /tmp/ai_system/
+
+  codeBase:
+    image: codebase
+    volumes:
+      - type: bind
+        source: ./ai_system
+        target: /tmp/ai_system
+    command: bash -c "python3 /tmp/codeBase/editor.py" 
+
+volumes:
+  myvol:

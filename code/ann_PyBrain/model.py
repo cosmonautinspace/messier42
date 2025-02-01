@@ -41,8 +41,8 @@ print('data split')
 '''Model configuration can be found below, need to optimize before final submission of the project....Just placeholder values for now, for testing 
 purposes'''
 
-hiddenLayers = 100
-rounds = 30
+hiddenLayers = 150
+rounds = 300
 
 '''
 ann = FeedForwardNetwork()

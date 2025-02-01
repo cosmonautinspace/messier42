@@ -1,8 +1,8 @@
-name: testapp
+name: messier42_createANN&OLS
 
 services:
   activationBase:
-    image: testactivationbase
+    image: activationbase
     volumes:
       - type: bind
         source: ./ai_system
@@ -10,7 +10,7 @@ services:
     command: cp -r /tmp/activationBase /tmp/ai_system/
 
   knowledgeBase:
-    image: testlearningbase
+    image: learningbase
     volumes:
       - type: bind
         source: ./ai_system
@@ -18,7 +18,7 @@ services:
     command: cp -r /tmp/learningBase /tmp/ai_system/
 
   codeBase:
-    image: testcodebase
+    image: codebase
     volumes:
       - type: bind
         source: ./ai_system

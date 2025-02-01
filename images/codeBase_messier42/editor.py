@@ -12,10 +12,10 @@ import statsmodels.api as sm
 #inputImage=input("Enter the name of the input image(placed in the input folder) >> ")
 
 image = Image.open(f'/tmp/ai_system/activationBase/activation_image.tif')
-annG = NetworkReader.readFrom(f"/tmp/ai_system/knowledgeBase/currentSolution.xml")
+annG = NetworkReader.readFrom(f"/tmp/ai_system/knowledgeBase/ann_model/currentSolution.xml")
 activationdf = pd.read_csv(f'/tmp/ai_system/activationBase/activation_data.csv')
-olsG = sm.load('/tmp/ai_system/knowledgeBase/currentOlsSolution_G.pkl')
-olsRB = sm.oad('/tmp/ai_system/knowledgeBase/currentOlsSolution_RB')
+olsG = sm.load('/tmp/ai_system/knowledgeBase/ols_model/currentOlsSolution_G.pkl')
+olsRB = sm.load('/tmp/ai_system/knowledgeBase/ols_model/currentOlsSolution_RB.pkl')
 
 '''renormalization of values'''
 normDf = pd.read_csv('/tmp/ai_system/activationBase/normFactors.csv')
@@ -32,13 +32,14 @@ rSD = normDf.rISD[0]
 gSD = normDf.gISD[0]
 bSD = normDf.bISD[0]
 
-print(f"The ANN activation for the given input csv file is (mean normalized) >> 
-      {annG.activate([activationdf.rI[0], activationdf.gI[0],activationdf.bI[0]])}")
+print(f"The ANN activation for the given input csv file is (mean normalized) >> {annG.activate([activationdf.rI[0], activationdf.gI[0],activationdf.bI[0]])}")
 
-x_rb = sm.add_constant(activationdf[['rI', 'bI']])
-x_g = sm.add_constant(activationdf['gI'])
-print(f"The ANN activation for the given input csv file is (mean normalized) >> 
-      {olsRB.predict(x_rb)} {olsG.predict(x_g)}")
+x_rb = activationdf[['rI', 'bI']]
+x_rb_sm= sm.add_constant(x_rb, has_constant='add')
+x_g = activationdf['gI']
+x_g_sm = sm.add_constant(x_g, has_constant='add')
+
+print(f"The ANN activation for the given input csv file is (mean normalized) >> {olsRB.predict(x_rb_sm)},  {olsG.predict(x_g_sm)}")
 
 print("The ANN will now be activated for the entire image. This might take a while, please wait....")
 for r in range(image.height):
