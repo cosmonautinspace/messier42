@@ -1,4 +1,4 @@
-# About the project
+# About messier42
 Stretching is an important part of processing RAW images, especially in the field of Astrophotography, where signals from distant Deep space objects can be extremely faint. Therefore, we need to "stretch" the signal. In simple terms, stretching involves changing the luminance values of pixels differently depending on what the source of the signal is. For example, the signal from a cloudy part of a nebula must be made brighter, but the signal from light glow (light pollution) must not be stretched to the same amount (or even be made fainter). This project aims to use an ANN model to perform the stretching process.
 
 The main idea behind the project is that the AI model could learn the stretching patterns of an astrophotographer and mimic their photo editing style, given an input map .csv file (generated from a collection of images by said photographer) 
