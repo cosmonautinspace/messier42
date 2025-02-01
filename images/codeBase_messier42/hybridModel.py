@@ -13,8 +13,8 @@ import numpy as np
 RGB subpixel values as input variables (3)
 RedBlueMultiplicationFactor and GreenMultiplicationFactor as the target variables (2)'''
 
-data = pd.read_csv('data/cleanedData/train_data.csv')
-testdf = pd.read_csv('data/cleanedData/test_data.csv')
+data = pd.read_csv('/tmp/ai_system/train_data.csv')
+testdf = pd.read_csv('/tmp/ai_system/test_data.csv')
 
 print('data read')
 alldata = SupervisedDataSet(inp=3, target=2)
@@ -62,8 +62,8 @@ for i in range(rounds):
     train_losses.append(model_loss)
     test_losses.append(trainer.testOnData(dataset=test))
 
-NetworkWriter.writeToFile(ann, f"code/ann_PyBrain/currentSolution.xml")
+NetworkWriter.writeToFile(ann, f"/tmp/ai_system/currentSolution.xml")
 
-np.savetxt("documentation/visualizations/source/ann_PyBrain/train_losses.csv", train_losses, delimiter=",")
-np.savetxt("documentation/visualizations/source/ann_PyBrain/test_losses.csv", test_losses, delimiter=",")
+np.savetxt("/tmp/ai_system/train_losses.csv", train_losses, delimiter=",")
+np.savetxt("/tmp/ai_system/test_losses.csv", test_losses, delimiter=",")
 
