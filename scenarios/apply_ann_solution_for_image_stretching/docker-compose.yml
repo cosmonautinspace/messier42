@@ -2,7 +2,8 @@ name: messier42_applyANNSolution
 
 services:
   activationBase:
-    image: activationbase
+    image: haaniansari/activationbase_messier42
+    #also available at {add the link to your docker repo}
     volumes:
       - type: bind
         source: ./ai_system
@@ -10,7 +11,8 @@ services:
     command: cp -r /tmp/activationBase /tmp/ai_system/
 
   knowledgeBase:
-    image: knowledgebase
+    image: haaniansari/knowledgebase_messier42
+    #also available at {add the link to your docker repo}
     volumes:
       - type: bind
         source: ./ai_system
@@ -18,7 +20,8 @@ services:
     command: cp -r /tmp/knowledgeBase /tmp/ai_system/
 
   codeBase:
-    image: codebase
+    image: haaniansari/codebase_messier42
+    #also available at {add the link to your docker repo}
     volumes:
       - type: bind
         source: ./ai_system

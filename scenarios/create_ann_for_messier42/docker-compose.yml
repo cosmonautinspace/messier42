@@ -2,7 +2,8 @@ name: messier42_createANN&OLS
 
 services:
   activationBase:
-    image: activationbase
+    image: haaniansari/activationbase_messier42
+    #also available at {add the link to your docker repo}
     volumes:
       - type: bind
         source: ./ai_system
@@ -10,7 +11,8 @@ services:
     command: cp -r /tmp/activationBase /tmp/ai_system/
 
   learningBase:
-    image: learningbase
+    image: haaniansari/learningbase_messier42
+    #also available at {add the link to your docker repo}
     volumes:
       - type: bind
         source: ./ai_system
@@ -18,7 +20,8 @@ services:
     command: cp -r /tmp/learningBase /tmp/ai_system/
 
   codeBase:
-    image: codebase
+    image: haaniansari/codebase_messier42
+    #also available at {add the link to your docker repo}
     volumes:
       - type: bind
         source: ./ai_system
