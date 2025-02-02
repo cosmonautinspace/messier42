@@ -1,4 +1,4 @@
-name: messier42_applySolution
+name: messier42_applyANNSolution
 
 services:
   activationBase:
@@ -23,7 +23,7 @@ services:
       - type: bind
         source: ./ai_system
         target: /tmp/ai_system
-    command: bash -c "python3 /tmp/codeBase/editor.py" 
+    command: bash -c "python3 /tmp/codeBase/activateANN.py" 
 
 volumes:
   myvol:

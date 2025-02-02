@@ -4,7 +4,7 @@ from PIL import Image
 from pybrain.tools.customxml.networkreader import NetworkReader
 import math
 import pandas as pd
-import statsmodels.api as sm
+
 '''This script is for the final adjustment of pixel values of a given unstrectched image'''
 
 #greenModel = input("Enter the name of the model to use for the Green Channel >> ")
@@ -14,8 +14,7 @@ import statsmodels.api as sm
 image = Image.open(f'/tmp/ai_system/activationBase/activation_image.tif')
 annG = NetworkReader.readFrom(f"/tmp/ai_system/knowledgeBase/ann_model/currentSolution.xml")
 activationdf = pd.read_csv(f'/tmp/ai_system/activationBase/activation_data.csv')
-olsG = sm.load('/tmp/ai_system/knowledgeBase/ols_model/currentOlsSolution_G.pkl')
-olsRB = sm.load('/tmp/ai_system/knowledgeBase/ols_model/currentOlsSolution_RB.pkl')
+
 
 '''renormalization of values'''
 normDf = pd.read_csv('/tmp/ai_system/activationBase/normFactors.csv')
@@ -33,13 +32,6 @@ gSD = normDf.gISD[0]
 bSD = normDf.bISD[0]
 
 print(f"The ANN activation for the given input csv file is (mean normalized) >> {annG.activate([activationdf.rI[0], activationdf.gI[0],activationdf.bI[0]])}")
-
-x_rb = activationdf[['rI', 'bI']]
-x_rb_sm= sm.add_constant(x_rb, has_constant='add')
-x_g = activationdf['gI']
-x_g_sm = sm.add_constant(x_g, has_constant='add')
-
-print(f"The ANN activation for the given input csv file is (mean normalized) >> {olsRB.predict(x_rb_sm)},  {olsG.predict(x_g_sm)}")
 
 print("The ANN will now be activated for the entire image. This might take a while, please wait....")
 for r in range(image.height):
