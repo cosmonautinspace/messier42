@@ -33,7 +33,7 @@ test = testData
 print('data split')
 
 
-hiddenLayers = 250
+hiddenLayers = 100
 rounds = 100
 
 ann = FeedForwardNetwork()
@@ -64,6 +64,6 @@ for i in range(rounds):
 
 NetworkWriter.writeToFile(ann, f"code/ann_PyBrain/currentSolution.xml")
 
-np.savetxt("documentation/visualizations/source/ann_PyBrain/train_losses.csv", train_losses, delimiter=",")
-np.savetxt("documentation/visualizations/source/ann_PyBrain/test_losses.csv", test_losses, delimiter=",")
+np.savetxt("documentation/visualisations/source/ann_PyBrain/train_losses.csv", train_losses, delimiter=",")
+np.savetxt("documentation/visualisations/source/ann_PyBrain/test_losses.csv", test_losses, delimiter=",")
 

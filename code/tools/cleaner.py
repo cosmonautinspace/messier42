@@ -148,7 +148,7 @@ normalizationValues = {'gMMean':[gMMin], 'gMSD':[gMSD], 'rbMMean':[rbMMin], 'rMS
 normalizationDataframe = pd.DataFrame.from_dict(normalizationValues)
 print(normalizationDataframe)
 
-normalizationDataframe.to_csv(f'data/cleanedData/normFactors.csv', index=False)
+normalizationDataframe.to_csv(f'data/cleanedData/{fileName}_normFactors.csv', index=False)
 
 
 activationData = data.iloc[[f'{random.randint(0,10)}']] 
