@@ -28,38 +28,40 @@ This project is released under the AGPL 3.0 license and was built as a part of t
 ## Structure
 This section gives an overview of the code and folder structure of the project.
 The project has the following folder structure:
-├───code
-│   ├───(NotInUse)ann_Tensorflow
-│   ├───ann_PyBrain
-│   ├───ols
-│   └───tools
-│       └───visualisers
-├───data
-│   ├───backup
-│   ├───cleanedData
-│   ├───extras
-│   ├───photos
-│   │   ├───input
-│   │   ├───output
-│   │   └───target
-│   ├───scrapedData
-│   └───scrapeFromHere
-├───documentation
-│   ├───instructions
-│   └───visualisations
-│       └───source
-│           ├───ann_Pybrain
-│           └───ols
-├───images
-│   ├───activationBase_messier42
-│   ├───codeBase_messier42
-│   ├───knowledgeBase_messier42
-│   └───learningBase_messier42
-└───scenarios
-    ├───apply_ann_solution_for_image_stretching
-    ├───apply_ols_solution
-    ├───create_ann_for_messier42
-    └───create_models_and_apply_solution
+`
+    ├───code
+    │   ├───(NotInUse)ann_Tensorflow
+    │   ├───ann_PyBrain
+    │   ├───ols
+    │   └───tools
+    │       └───visualisers
+    ├───data
+    │   ├───backup
+    │   ├───cleanedData
+    │   ├───extras
+    │   ├───photos
+    │   │   ├───input
+    │   │   ├───output
+    │   │   └───target
+    │   ├───scrapedData
+    │   └───scrapeFromHere
+    ├───documentation
+    │   ├───instructions
+    │   └───visualisations
+    │       └───source
+    │           ├───ann_Pybrain
+    │           └───ols
+    ├───images
+    │   ├───activationBase_messier42
+    │   ├───codeBase_messier42
+    │   ├───knowledgeBase_messier42
+    │   └───learningBase_messier42
+    └───scenarios
+        ├───apply_ann_solution_for_image_stretching
+        ├───apply_ols_solution
+        ├───create_ann_for_messier42
+        └───create_models_and_apply_solution
+`
 ### 1) Code
 The code folder contains all the python scripts that were used to realise the project. 
 
