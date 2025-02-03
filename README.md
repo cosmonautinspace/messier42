@@ -5,6 +5,23 @@ The main idea behind the project is that the AI model could learn the stretching
 
 The project involves scraping data from the internet, which in this case is done by scraping a .csv file uploaded to this repository under the `data/scrapeFromHere` folder. Then, the data is cleaned and an OLS and ANN model are trained and tested using an 80:20 train:test split. Lastly, two docker images, one for the training and one for applying the solution to a given set of data points are created and docker compose files are used to orchestrate the training, testing and application of the ANN solution. 
 
+## How to run the project:
+Detailed instructions on how to run the project are available in the documentation/instructions folder. The instructions to run a demo of the project are available here:
+
+### Requirements:
+    1. Docker Desktop/Docker engine
+    2. `Python3` and `matplotlib` if you want to visualise the test/training losses for the ANN model
+
+### Steps:
+    1. Download one of the scenario folders from the repository
+    2. Make sure Docker Engine is running, if not start it by running the Docker desktop app
+    3. Open the terminal in the downloaded scenario folder
+    4. Enter the following command 
+        ```
+        docker compose up
+        ```
+    5. The results will be saved in a newly created ai_system folder
+
 ## Ownership
 This project is released under the AGPL 3.0 license and was built as a part of the course 'M. Grum: Advanced AI-based Application systems' (University of Potsdam) by Haani Ansari and Dipta Roy Karmakar.
 
@@ -12,15 +29,49 @@ This project is released under the AGPL 3.0 license and was built as a part of t
 This section gives an overview of the code and folder structure of the project.
 The project has the following folder structure:
 
-`Add terminal output from tree command here`
+    ├───code
+    │   ├───(NotInUse)ann_Tensorflow
+    │   ├───ann_PyBrain
+    │   ├───ols
+    │   └───tools
+    │       └───visualisers
+    ├───data
+    │   ├───backup
+    │   ├───cleanedData
+    │   ├───extras
+    │   ├───photos
+    │   │   ├───input
+    │   │   ├───output
+    │   │   └───target
+    │   ├───scrapedData
+    │   └───scrapeFromHere
+    ├───documentation
+    │   ├───instructions
+    │   └───visualisations
+    │       └───source
+    │           ├───ann_Pybrain
+    │           └───ols
+    ├───images
+    │   ├───activationBase_messier42
+    │   ├───codeBase_messier42
+    │   ├───knowledgeBase_messier42
+    │   └───learningBase_messier42
+    └───scenarios
+        ├───apply_ann_solution_for_image_stretching
+        ├───apply_ols_solution
+        ├───create_ann_for_messier42
+        └───create_models_and_apply_solution
 
 ### 1) Code
 The code folder contains all the python scripts that were used to realise the project. 
 
 #### 1.1) ANN_Pybrain/Tensorflow
 These 2 folders contain the python code (model.py) required to the train the model. They also store a copy of the trained model(s).
-There are two models that are created using the `model.py` script. One of the model is trained exclusively on the green channel and the other model is trained on the data from Red and Blue channel. 
-Information regarding why this is done so is available in the `About the project section`.
+A FNN model is created when running the `hybridModel.py` which uses the `train_data.csv` and `test_data.csv` for the training and validation of the model. The model has 3 input variables (RGB subpixel values) and 2 output variables (the multiplication factor for Red & Blue channel and the multiplication factor for the green channel)
+
+The model configuration is as follows: 
+1. Hidden Layers = 100 with Sigmoid activation function
+2. 100 rounds of training
 The Tensorflow folder currently only contains a placeholder script as the current model was made using Pybrain.
 
 #### 1.2) OLS
@@ -46,7 +97,7 @@ Note: This folder does not contain the code for all visualisations found in the 
 ### 2) Data
 This folder contains the CSV and images used to train and test the ANN model.
 
-#### 2.1) Images
+#### 2.1) Photos
 This folder contains the images (usually in .TIF format) that the model was trained on.
 
 #### 2.2) ScrapeFromHere
@@ -60,6 +111,11 @@ This folder contains all the CSV files that have been cleaned, using the `cleane
 
 ### 3) Images
 This folder contains the activation and knowledge base docker images for the AI application. The images are in their respectively named subfolders
+
+1. activationBase_messier42: This contains the dockerfile and the files loaded to said docker file for building the activation base image availalbe at haaniansari/activationbase_messer42
+2. codeBase_messier42: same as above and available at haaniansari/codebase_messier42
+3. knowledgeBase_messier42: same as above and availalbe at haaniansari/knowledgebase_messier42
+4. learningBase_messier42: same as above and availalbe at haaniansari/learningbase_messier42
 
 
 
