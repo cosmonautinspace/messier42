@@ -113,8 +113,8 @@ This folder contains all the CSV files that have been cleaned, using the `cleane
 This folder contains the activation and knowledge base docker images for the AI application. The images are in their respectively named subfolders
 
 1. activationBase_messier42: This contains the dockerfile and the files loaded to said docker file for building the activation base image availalbe at haaniansari/activationbase_messer42
-2. codeBase_messier42: same as above and available at haaniansari/codebase_messier42
-3. knowledgeBase_messier42: same as above and availalbe at haaniansari/knowledgebase_messier42
+2. codeBase_messier42: same as above and available at droyyy/codebase_messier42
+3. knowledgeBase_messier42: same as above and availalbe at droyyy/knowledgebase_messier42
 4. learningBase_messier42: same as above and availalbe at haaniansari/learningbase_messier42
 
 
