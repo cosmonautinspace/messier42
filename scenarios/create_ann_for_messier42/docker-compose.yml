@@ -20,7 +20,7 @@ services:
     command: cp -r /tmp/learningBase /tmp/ai_system/
 
   codeBase:
-    image: haaniansari/codebase_messier42
+    image: droyyy/codebase_messier42
     #also available at {add the link to your docker repo}
     volumes:
       - type: bind
