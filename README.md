@@ -9,18 +9,18 @@ The project involves scraping data from the internet, which in this case is done
 Detailed instructions on how to run the project are available in the documentation/instructions folder. The instructions to run a demo of the project are available here:
 
 ### Requirements:
-    1. Docker Desktop/Docker engine
-    2. `Python3` and `matplotlib` if you want to visualise the test/training losses for the ANN model
+1. Docker Desktop/Docker engine
+2. `Python3` and `matplotlib` if you want to visualise the test/training losses for the ANN model
 
 ### Steps:
-    1. Download one of the scenario folders from the repository
-    2. Make sure Docker Engine is running, if not start it by running the Docker desktop app
-    3. Open the terminal in the downloaded scenario folder
-    4. Enter the following command 
+1. Download one of the scenario folders from the repository
+2. Make sure Docker Engine is running, if not start it by running the Docker desktop app
+3. Open the terminal in the downloaded scenario folder
+4. Enter the following command 
         ```
         docker compose up
         ```
-    5. The results will be saved in a newly created ai_system folder
+5. The results will be saved in a newly created ai_system folder
 
 ## Ownership
 This project is released under the AGPL 3.0 license and was built as a part of the course 'M. Grum: Advanced AI-based Application systems' (University of Potsdam) by Haani Ansari and Dipta Roy Karmakar.
