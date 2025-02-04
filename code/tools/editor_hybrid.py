@@ -10,7 +10,7 @@ import pandas as pd
 
 
 
-image = Image.open(f'data/photos/input/temp.tif')
+image = Image.open(f'data/photos/input/orion8bit.tif')
 annG = NetworkReader.readFrom(f"code/ann_PyBrain/currentSolution.xml")
 
 '''renormalization of values'''
