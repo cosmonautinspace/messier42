@@ -2,19 +2,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-rb_train_losses = np.loadtxt("documentation/visualisations/source/ann_PyBrain/rb_train_losses.csv", delimiter=",")
-rb_test_losses = np.loadtxt("documentation/visualisations/source/ann_PyBrain/rb_test_losses.csv", delimiter=",")
-g_train_losses = np.loadtxt("documentation/visualisations/source/ann_PyBrain/g_train_losses.csv", delimiter=",")
-g_test_losses = np.loadtxt("documentation/visualisations/source/ann_PyBrain/g_test_losses.csv", delimiter=",")
+train_losses = np.loadtxt("documentation/visualisations/source/ann_PyBrain/train_losses.csv", delimiter=",")
+test_losses = np.loadtxt("documentation/visualisations/source/ann_PyBrain/test_losses.csv", delimiter=",")
 
 rb_residuals = np.loadtxt("documentation/visualisations/source/ols/rb_ols_residuals.csv", delimiter=",")
 g_residuals = np.loadtxt("documentation/visualisations/source/ols/g_ols_residuals.csv", delimiter=",")
 
 plt.figure(figsize=(10, 6))
-plt.plot(rb_train_losses, label="RB Train Loss")
-plt.plot(rb_test_losses, label="RB Test Loss")
-plt.plot(g_train_losses, label="G Train Loss")
-plt.plot(g_test_losses, label="G Test Loss")
+plt.plot(train_losses, label="Train Loss")
+plt.plot(test_losses, label="Test Loss")
 plt.xlabel("Epochs")
 plt.ylabel("Loss")
 plt.legend()
