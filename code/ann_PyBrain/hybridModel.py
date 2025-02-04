@@ -34,7 +34,7 @@ print('data split')
 
 
 hiddenLayers = 100
-rounds = 100
+rounds = 50
 
 ann = FeedForwardNetwork()
 
